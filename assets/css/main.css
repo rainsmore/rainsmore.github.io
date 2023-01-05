@@ -2414,6 +2414,15 @@ input, select, textarea {
 				width: 100%;
 			}
 
+		.image.circle img {
+			border-radius: 50%;
+			width:"190";
+			height:"200";
+			box-shadow: 4px 4px 10px rgb(202, 202, 202);
+		}
+
+		
+
 /* List */
 
 	ol {
