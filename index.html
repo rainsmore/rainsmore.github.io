@@ -70,6 +70,7 @@
 								<ul class="features">
 									<li>
 										<!-- Profile Photos -->
+										<!-- Perhaps create a popup to each member containing a short information about each one. -->
 										<span class="image circle"><img src="images/profiles/marielle.png" alt="marielle.png"/></span>
 										<h3><strong>Marielle Gosset</strong></h3>
 										<h4>IRD/GET</h4>
@@ -84,18 +85,55 @@
 									</li>
 
 									<li>
-										<span class="image circle"><img src="images/profiles/tarcisio_maciel.png" alt="tarcisio.jpg"/></span>
+										<span class="image circle"><img src="images/profiles/tarcisio_maciel.png" alt="tarcisio.png"/></span>
 										<h3><strong>Tarcisio Maciel</strong> </h3>
 										<h4>UFC/GTEL</h4>
 										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
 									</li>
 
 									<li>
-										<span class="image circle"><img src="images/profiles/romulo.png" alt="romulo.jpg"/></span>
+										<span class="image circle"><img src="images/profiles/romulo.png" alt="romulo.png"/></span>
 										<h3><strong>Romulo Oliveira</strong> </h3>
 										<h4>IRD/GET</h4>
 										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
 									</li>
+
+									<li>
+										<span class="image circle"><img src="images/profiles/kacou.png" alt="kacou.png"/></span>
+										<h3><strong>Modeste Kacou</strong> </h3>
+										<h4>UFHB</h4>
+										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
+									</li>
+
+									<li>
+										<span class="image circle"><img src="images/profiles/rafael.jpg" alt="rafael.jpg"/></span>
+										<h3><strong>Rafael Reis</strong> </h3>
+										<h4>FUNCEME</h4>
+										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
+									</li>
+
+									<li>
+										<span class="image circle"><img src="images/profiles/nicolas.jpg" alt="nicolas.jpg"/></span>
+										<h3><strong>Nícolas Araujo</strong> </h3>
+										<h4>UFC</h4>
+										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
+									</li>
+									<!-- Example: Abstract of each one on Popup -->
+									<li>
+										<span class="image circle"><img src="images/profiles/emilie.jpg" alt="Emilie.jpg"/></span>
+										<h3><strong>Emilie Caillault</strong> </h3>
+										<h3 class="popup" onclick="myFunction()"><strong>Emilie Caillault</strong> 
+											<span class="popuptext" id="myPopup"> Short Introduction . . .</span>
+										</h3> 
+										<h4>ULCO</h4>
+										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
+									</li>
+
+									<!-- EXAMPLE POPUP -->
+									<div class="popup" onclick="myFunction()">Click me!
+										<span class="popuptext" id="myPopup">Popup text...</span>
+									</div>
+
 								</ul>
 								<footer class="major">
 									<ul class="actions special">
@@ -200,6 +238,13 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				// When the user clicks on div, open the popup
+				function myFunction() {
+				  var popup = document.getElementById("myPopup");
+				  popup.classList.toggle("show");
+				}
+			</script>
 
 	</body>
 </html>
