@@ -3798,7 +3798,7 @@ input, select, textarea {
  /* Popup */
 
  /* Popup container */
-.popup {
+ .popup {
 	position: relative;
 	display: inline-block;
 	cursor: pointer;
@@ -3806,22 +3806,23 @@ input, select, textarea {
   
   /* The actual popup (appears on top) */
   .popup .popuptext {
+	border: solid 1px #17151f;
 	visibility: hidden;
-	width: 160px;
-	background-color: #555;
-	color: #fff;
-	text-align: center;
+	width: 460px;
+	background-color: rgb(255, 255, 255);
+	border-color: rgb(68, 68, 68);
+	text-align: justify;
 	border-radius: 6px;
-	padding: 8px 0;
+	padding: 12px;
 	position: absolute;
 	z-index: 1;
 	bottom: 125%;
 	left: 50%;
-	margin-left: -80px;
+	margin: auto;
   }
   
   /* Popup arrow */
-  .popup .popuptext::after {
+  /* .popup .popuptext::after {
 	content: "";
 	position: absolute;
 	top: 100%;
@@ -3830,10 +3831,10 @@ input, select, textarea {
 	border-width: 5px;
 	border-style: solid;
 	border-color: #555 transparent transparent transparent;
-  }
+  } */
   
   /* Toggle this class when clicking on the popup container (hide and show the popup) */
-  .popup .show {
+ .popup .show {
 	visibility: visible;
 	-webkit-animation: fadeIn 1s;
 	animation: fadeIn 1s
@@ -3849,3 +3850,18 @@ input, select, textarea {
 	from {opacity: 0;}
 	to {opacity:1 ;}
   }
+
+
+  /* .popup{
+	position: fixed;
+	top: 0; bottom: 0;
+	left: 0; right: 0;
+	margin: auto;
+	width: 320px;
+	height: 130px;
+	padding: 15px;
+	border: solid 1px #17151f;
+	border-radius: 6px;
+	background-color: rgb(255, 255, 255);
+	display: none;
+} */

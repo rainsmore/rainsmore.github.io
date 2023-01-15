@@ -114,26 +114,41 @@
 
 									<li>
 										<span class="image circle"><img src="images/profiles/nicolas.jpg" alt="nicolas.jpg"/></span>
-										<h3><strong>Nícolas Araujo</strong> </h3>
+										<!-- <h3><strong>Nícolas Araujo</strong> </h3> -->
+										<br>
+										<div class="popup" onclick="myFunction()"><h3><strong>Nícolas Araujo</strong></h3>
+										<span class="popuptext" id="popup">
+										Nicolas ...
+										Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.
+										Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.
+										Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.
+										Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.
+										<span>
+										</div>
 										<h4>UFC</h4>
-										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
 									</li>
+
 									<!-- Example: Abstract of each one on Popup -->
 									<li>
 										<span class="image circle"><img src="images/profiles/emilie.jpg" alt="Emilie.jpg"/></span>
-										<h3><strong>Emilie Caillault</strong> </h3>
-										<h3 class="popup" onclick="myFunction()"><strong>Emilie Caillault</strong> 
-											<span class="popuptext" id="myPopup"> Short Introduction . . .</span>
-										</h3> 
+										<!-- <h3><strong>Emilie Caillault</strong> </h3> -->
+										<br>
+										<div class="popup" onclick="myFunction()"><h3><strong>Emilie Caillault</strong></h3>
+										<span class="popuptext" id="popup">										
+										Emilie ...
+										Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.
+										Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.
+										Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.
+										Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.
+										</span>
+										</div>
 										<h4>ULCO</h4>
-										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
 									</li>
 
 									<!-- EXAMPLE POPUP -->
-									<div class="popup" onclick="myFunction()">Click me!
-										<span class="popuptext" id="myPopup">Popup text...</span>
-									</div>
-
+									<!-- <div class="popup" onclick="myFunction()">Click me!
+										<span class="popuptext" id="myPopup2">Popup text...</span>
+									</div> -->
 								</ul>
 								<footer class="major">
 									<ul class="actions special">
@@ -241,8 +256,8 @@
 			<script>
 				// When the user clicks on div, open the popup
 				function myFunction() {
-				  var popup = document.getElementById("myPopup");
-				  popup.classList.toggle("show");
+				  	var popup = document.getElementById("popup");
+					popup.classList.toggle("show");
 				}
 			</script>
 
