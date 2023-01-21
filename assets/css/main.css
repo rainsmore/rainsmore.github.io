@@ -3881,14 +3881,14 @@ input, select, textarea {
 	-moz-transition: opacity 400ms ease-in;
 	transition: opacity 400ms ease-in;
 	pointer-events: none;
-	text-align: match-parent ;
+	text-align: justify;
   }
   .modalDialog:target {
 	opacity: 1;
 	pointer-events: auto;
   }
   .modalDialog > div {
-	width: 400px;
+	width: 850px;
 	position: relative;
 	margin: 10% auto;
 	padding: 5px 20px 13px 20px;
