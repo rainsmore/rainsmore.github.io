@@ -3874,7 +3874,7 @@ input, select, textarea {
 	right: 0;
 	bottom: 0; /*To darken the background*/
 	left: 0;
-	background: rgba(0, 0, 0, 0.8);
+	background: rgba(0, 0, 0, 0.73);
 	z-index: 99999;
 	opacity: 0;
 	-webkit-transition: opacity 400ms ease-in;
@@ -3893,7 +3893,7 @@ input, select, textarea {
 	margin: 4% auto;
 	padding: 5px 20px 13px 20px;
 	border-radius: 10px;
-	background: rgb(233, 233, 233);
+	background: rgb(241, 241, 241);
 	/* background: -moz-linear-gradient(#fff, #999);
 	background: -webkit-linear-gradient(#fff, #999);
 	background: -o-linear-gradient(#fff, #999); */
