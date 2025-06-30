@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAINSMORE - Publications</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <header class="bg-white py-3">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="logo">
+        <a href="index.html">
+          <img src="assets/images/rainsmore-logo.png" alt="RAINSMORE Logo" width="150" />
+        </a>
+      </div>
+      <nav class="navbar navbar-expand-lg">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a href="index.html" class="nav-link text-primary">Accueil</a></li>
+            <li class="nav-item"><a href="a-propos.html" class="nav-link text-primary">À propos</a></li>
+            <li class="nav-item"><a href="news.html" class="nav-link text-primary">News</a></li>
+            <li class="nav-item"><a href="publications.html" class="nav-link text-primary">Publications</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Bannière -->
+  <div class="banner position-relative">
+    <img src="assets/images/12.png" class="img-fluid w-100" alt="Bannière RAINSMORE" />
+    <h1 class="position-absolute top-50 start-50 translate-middle text-white fw-bold bg-dark bg-opacity-50 p-3 rounded">
+      Publications
+    </h1>
+  </div>
+
+  <!-- Filtres -->
+  <div class="container my-4">
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <input type="text" id="searchInput" class="form-control" placeholder="Rechercher une publication...">
+      </div>
+      <div class="col-md-4">
+        <select id="yearFilter" class="form-select">
+          <option value="">Filtrer par année</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <select id="authorFilter" class="form-select">
+          <option value="">Filtrer par auteur</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section Articles dynamiques -->
+  <div class="container my-5">
+    <h2 class="mb-4">Toutes les Publications</h2>
+    <div id="article-list" class="row gy-4"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-5 bg-light py-4">
+    <div class="container text-center">
+      <p>© RAINSMORE 2025 — Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase + Affichage -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrDc7Gl3VLtSkwHhR0jK_VoOslfcF6nOk",
+      authDomain: "rainsmore-85ac6.firebaseapp.com",
+      projectId: "rainsmore-85ac6",
+      storageBucket: "rainsmore-85ac6.appspot.com",
+      messagingSenderId: "313663747075",
+      appId: "1:313663747075:web:38aab8b070065bb76f0a36"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const articleList = document.getElementById("article-list");
+      const q = query(collection(db, "articles"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
+
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const card = document.createElement("div");
+        card.className = "col-md-4";
+        card.innerHTML = `
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">${data.titre}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">${data.auteur || ""}</h6>
+              <p class="card-text">${data.contenu}</p>
+              ${data.lien ? `<a href="${data.lien}" class="btn btn-primary" target="_blank">Lire plus</a>` : ""}
+            </div>
+          </div>
+        `;
+        articleList.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>

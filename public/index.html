@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAINSMORE - Accueil</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+<header class="bg-white py-3">
+    <div class="container d-flex align-items-center justify-content-between">
+        <div class="logo">
+            <a href="index.html">
+                <img src="assets/images/rainsmore-logo.png" alt="RAINSMORE Logo" width="150">
+            </a>
+        </div>
+        <nav class="navbar navbar-expand-lg">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link text-primary">Accueil</a></li>
+                    <li class="nav-item"><a href="a-propos.html" class="nav-link text-primary">À propos</a></li>
+                    <li class="nav-item"><a href="actualites.html" class="nav-link text-primary">Actualités</a></li>
+                    <li class="nav-item"><a href="publications.html" class="nav-link text-primary">Publications</a></li>
+                    <li class="nav-item"><a href="/en/" class="nav-link">English</a></li>
+
+                    <!-- 🔐 Lien vers admin (masqué par défaut) -->
+                    <li class="nav-item"><a id="admin-link" href="admin.html" class="nav-link text-danger fw-bold" style="display: none;">Publier</a></li>
+                </ul>
+
+                    <!-- 🔐 Bouton login/logout -->
+                    <button id="auth-button" class="btn btn-outline-primary ms-3"></button>
+
+            </div>
+        </nav>
+    </div>
+</header>
+    
+    <!-- Bannière -->
+    <div class="banner position-relative">
+        <img src="assets/images/12.png" class="img-fluid w-100" alt="Bannière RAINSMORE">
+        <h1 class="position-absolute top-50 start-50 translate-middle text-white fw-bold bg-dark bg-opacity-50 p-3 rounded">Accueil</h1>
+    </div>
+    
+    
+    <!-- Start -->
+    <main class="container mt-5">
+        <section class="wow fadeInUp" data-wow-delay="0.2s">
+            <section class="presentation">
+                <div class="container">
+                    <h2>Présentation générale de RAINSMORE</h2>
+                    <div class="row align-items-center">
+                    <p><strong>RAINSMORE</strong>, pour « Raincell et Autres INnovations, Satellites et Mesure Opportunistes
+                         issues des Reseaux de telecommunication, pour Estimation et spatialisation des precipitations » 
+                         est un Réseau International de Recherche (IRN) financé par l'Institut de Recherche pour le Développement (IRD).</p>
+                </div>
+                <div class="presentation-image">
+                    <img src="assets/images/5.jpg" alt="Présentation RAINSMORE">
+                    
+                </div>
+            </section> 
+        </section>
+        <!-- First Section -->
+        <section class="wow fadeInUp" data-wow-delay="0.4s">
+            <section class=".objectifs">
+                <div class="container">
+                    <h2>Nos Objectifs</h2>
+                    <div class="row align-items-center">
+                        <!-- Texte explicatif -->
+                        <div class="col-md-6">
+                            <p>L'objectif de <strong>RAINSMORE</strong> est de développer et de promouvoir une approche innovante pour améliorer la surveillance des précipitations dans le monde entier, pour de nombreuses
+                                 applications telles que l'hydrologie ou la surveillance du climat. .</p>
+                            <img src="assets/images/11.png" alt="Illustration des objectifs" class="img-fluid objectifs-img">
+                           </div>
+                        
+                        <!-- Liste des objectifs -->
+                        <div class="col-md-6">
+                            <ul class="list-unstyled objectifs-list">
+                                <li><i class="fas fa-tint"></i> Promouvoir la technique Rain Cell, qui utilise le réseau de télécommunication cellulaire pour l'estimation des précipitations. </li>
+                                <li><i class="fas fa-globe"></i> Mener des recherches et de nombreuses activités de renforcement des capacités, avec des ateliers thématiques et de nombreux étudiants à bord</li>
+                                <li><i class="fas fa-users"></i> RAINSMORE rassemble une équipe internationale, avec des spécialistes de l'hydrométéorologie et des experts en science des données ou en apprentissage profond</li>
+                                <li><i class="fas fa-chart-line"></i>L'utilisation d'enregistreurs sonores pour la détection des précipitations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>            
+        </section>
+        
+        <section class="wow fadeInUp" data-wow-delay="0.6s">
+            <section class="missions">
+                <div class="container">
+                    <h2>Notre Mission</h2>
+                    <div class="row align-items-center">
+                        <!-- Liste des missions -->
+                        <div class="col-md-6">
+                            <ul class="list-unstyled missions-list">
+                                <li><i class="fa-solid fa-tint"></i> Surveillance avancée des précipitations 🌧️</li>
+                                <li><i class="fa-solid fa-chart-line"></i> Analyse des tendances climatiques 📊</li>
+                                <li><i class="fa-solid fa-globe"></i> Développement de solutions innovantes en hydrologie 🛰️</li>
+                                <li><i class="fa-solid fa-users"></i> Renforcement de la collaboration scientifique internationale 🤝</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Texte explicatif -->
+                        <div class="col-md-6">
+                            
+                        <p>La <strong>mission principale de RAINSMORE</strong> est d'améliorer la compréhension des phénomènes hydrologiques à travers l'utilisation de technologies avancées, notamment l'observation spatiale et les capteurs innovants.</p>
+                        <img src="assets/images/8.jpg" alt="Illustration des Missions" class="img-fluid missions-img">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>    
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: contact@rainsmore.org</p>
+                    <p>Téléphone: +123 456 789</p>
+                </div>
+                <div class="col-md-4 footer-section">
+                    <h4>Liens utiles</h4>
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">À propos</a></li>
+                        <li><a href="#">Publications</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 footer-section">
+                    <h4>Notre emplacement</h4>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434508616!2d144.9630579155048!3d-37.813627742021824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0x5045675218ce6e0!2sMelbourne%2C+Australie!5e0!3m2!1sfr!2s!4v1494246398871" width="100%" height="200" style="border:0;" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <p>&copy; 2025 RAINSMORE. Tous droits réservés.</p>
+    </div>
+    
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
+    <!-- Bootstrap JS (avec Popper.js inclus) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const objectifsSection = document.querySelector(".objectifs");
+    
+        if (objectifsSection) {
+            function revealOnScroll() {
+                const sectionTop = objectifsSection.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+    
+                if (sectionTop < windowHeight - 100) { // Détection 100px avant l'affichage complet
+                    objectifsSection.classList.add("active");
+                    window.removeEventListener("scroll", revealOnScroll); // Empêche l'exécution répétée
+                }
+            }
+    
+            window.addEventListener("scroll", revealOnScroll);
+            revealOnScroll(); // Vérifie dès le chargement si la section est déjà visible
+        }
+    });
+    </script> 
+    
+    <script>
+        const firebaseConfig = {
+          apiKey: "AIzaSyCrDc7Gl3VLtSkwHhR0jK_VoOslfcF6nOk",
+          authDomain: "rainsmore-85ac6.firebaseapp.com",
+          projectId: "rainsmore-85ac6",
+          storageBucket: "rainsmore-85ac6.appspot.com",
+          messagingSenderId: "313663747075",
+          appId: "1:313663747075:web:38aab8b070065bb76f0a36"
+        };
+      
+        firebase.initializeApp(firebaseConfig);
+      
+        firebase.auth().onAuthStateChanged(user => {
+          const adminLink = document.getElementById("admin-link");
+          const authButton = document.getElementById("auth-button");
+      
+          if (user) {
+            adminLink.style.display = "inline-block";
+            authButton.textContent = "Se déconnecter";
+            authButton.onclick = () => firebase.auth().signOut();
+          } else {
+            adminLink.style.display = "none";
+            authButton.textContent = "Se connecter";
+            authButton.onclick = () => {
+              const email = prompt("Email administrateur");
+              const pass = prompt("Mot de passe");
+              firebase.auth().signInWithEmailAndPassword(email, pass)
+                .catch(e => alert("Erreur : " + e.message));
+            };
+          }
+        });
+      </script>      
+    
+
+</body>
+</html>
