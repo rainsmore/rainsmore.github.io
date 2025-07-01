@@ -75,7 +75,8 @@
   <!-- Firebase + Affichage -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, query, orderBy, where } from
+ "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCrDc7Gl3VLtSkwHhR0jK_VoOslfcF6nOk",
@@ -91,7 +92,7 @@
 
     document.addEventListener("DOMContentLoaded", async () => {
       const articleList = document.getElementById("article-list");
-      const q = query(collection(db, "articles"), orderBy("createdAt", "desc"));
+      const q = query(collection(db, "articles"), where("langue", "==", "fr"), orderBy("createdAt", "desc"));
       const snapshot = await getDocs(q);
 
       snapshot.forEach(doc => {
