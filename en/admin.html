@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Publish Articles</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2>🎯 Article Publishing Interface</h2>
+      <a href="index.html" class="btn btn-outline-primary">🏠 Home</a>
+    </div>
+
+    <!-- Login Form -->
+    <div id="login-section" class="card p-4 shadow mb-4">
+      <h4 class="mb-3">Administrator Login</h4>
+      <input type="email" id="email" class="form-control mb-2" placeholder="Email" required>
+      <input type="password" id="password" class="form-control mb-2" placeholder="Password" required>
+      <button id="login-btn" class="btn btn-primary">Login</button>
+    </div>
+
+    <!-- Article Form -->
+    <form id="article-form" class="card shadow p-4 d-none">
+      <div class="mb-3">
+        <label for="titre" class="form-label">Title</label>
+        <input type="text" id="titre" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="contenu" class="form-label">Content</label>
+        <textarea id="contenu" class="form-control" rows="4" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" id="date" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="auteur" class="form-label">Author</label>
+        <input type="text" id="auteur" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="theme" class="form-label">Topic</label>
+        <input type="text" id="theme" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label for="lien" class="form-label">Link (optional)</label>
+        <input type="url" id="lien" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-success">✅ Publish</button>
+    </form>
+  </div>
+
+  <!-- Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrDc7Gl3VLtSkwHhR0jK_VoOslfcF6nOk",
+      authDomain: "rainsmore-85ac6.firebaseapp.com",
+      projectId: "rainsmore-85ac6",
+      storageBucket: "rainsmore-85ac6.appspot.com",
+      messagingSenderId: "313663747075",
+      appId: "1:313663747075:web:38aab8b070065bb76f0a36"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    const loginSection = document.getElementById("login-section");
+    const form = document.getElementById("article-form");
+
+    document.getElementById("login-btn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      try {
+        const userCred = await signInWithEmailAndPassword(auth, email, password);
+        alert("✅ Logged in successfully!");
+      } catch (err) {
+        console.error(err);
+        alert("❌ Login failed.");
+      }
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const token = await user.getIdTokenResult();
+        if (token.claims.admin === true) {
+          loginSection.classList.add("d-none");
+          form.classList.remove("d-none");
+        } else {
+          alert("❌ Access denied. You are not an administrator.");
+        }
+      }
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const titre = document.getElementById("titre").value.trim();
+      const contenu = document.getElementById("contenu").value.trim();
+      const auteur = document.getElementById("auteur").value.trim();
+      const date = document.getElementById("date").value;
+      const lien = document.getElementById("lien").value.trim();
+      const theme = document.getElementById("theme").value.trim();
+
+      if (!titre || !contenu || !auteur || !date) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, "articles"), {
+          titre,
+          contenu,
+          auteur,
+          date,
+          lien,
+          theme,
+          vues: 0,
+          langue: "en", // 🔁 Here’s the key: article marked as English
+          createdAt: Timestamp.now()
+        });
+
+        alert("✅ Article published successfully!");
+        form.reset();
+      } catch (err) {
+        console.error("Firebase error:", err);
+        alert("❌ An error occurred.");
+      }
+    });
+  </script>
+</body>
+</html>
