@@ -92,7 +92,7 @@
 
     document.addEventListener("DOMContentLoaded", async () => {
       const articleList = document.getElementById("article-list");
-      const q = query(collection(db, "articles"), where("langue", "==", "fr"), orderBy("createdAt", "desc"));
+      const q = query(collection(db, "articles"), orderBy("createdAt", "desc"));
       const snapshot = await getDocs(q);
 
       snapshot.forEach(doc => {
