@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <body>
+  <!-- Header -->
   <header class="bg-white py-3">
     <div class="container d-flex align-items-center justify-content-between">
       <div class="logo">
@@ -75,8 +76,7 @@
   <!-- Firebase + Affichage -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy, where } from
- "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCrDc7Gl3VLtSkwHhR0jK_VoOslfcF6nOk",
@@ -97,15 +97,29 @@
 
       snapshot.forEach(doc => {
         const data = doc.data();
+
+        let fichierHTML = "";
+        if (data.fichierURL) {
+          const extension = data.fichierURL.split('.').pop().toLowerCase();
+          if (["jpg", "jpeg", "png"].includes(extension)) {
+            fichierHTML = `<img src="${data.fichierURL}" alt="Fichier image" class="img-fluid rounded mt-3" />`;
+          } else {
+            fichierHTML = `<a href="${data.fichierURL}" target="_blank" class="btn btn-outline-secondary mt-2">
+              📎 Voir le fichier joint
+            </a>`;
+          }
+        }
+
         const card = document.createElement("div");
         card.className = "col-md-4";
         card.innerHTML = `
           <div class="card h-100">
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
               <h5 class="card-title">${data.titre}</h5>
               <h6 class="card-subtitle mb-2 text-muted">${data.auteur || ""}</h6>
               <p class="card-text">${data.contenu}</p>
-              ${data.lien ? `<a href="${data.lien}" class="btn btn-primary" target="_blank">Lire plus</a>` : ""}
+              ${data.lien ? `<a href="${data.lien}" class="btn btn-primary mb-2 mt-auto" target="_blank">Lire plus</a>` : ""}
+              ${fichierHTML}
             </div>
           </div>
         `;
