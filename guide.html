@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Guide : Ajouter un fichier PDF</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2em;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    code {
+      background-color: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 90%;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .section {
+      margin-bottom: 2em;
+    }
+  </style>
+</head>
+<body>
 
+  <h1>📘 Guide : Ajouter un fichier PDF dans le dossier <code>articles</code> et créer son lien</h1>
+
+  <div class="section">
+    <h2>✅ Étape 1 : Aller dans le dépôt GitHub</h2>
+    <ol>
+      <li>Va sur le dépôt du site : <br>
+        <a href="https://github.com/rainsmore/rainsmore.github.io" target="_blank">https://github.com/rainsmore/rainsmore.github.io</a></li>
+      <li>Clique sur le dossier <code>articles/</code><br>
+        (s’il n’existe pas encore, tu peux le créer en même temps que tu ajoutes un fichier)</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2>⬆️ Étape 2 : Uploader un fichier PDF</h2>
+    <ol>
+      <li>Clique sur <strong>"Add file"</strong> > <strong>"Upload files"</strong></li>
+      <li>Glisse ton fichier PDF (ex : <code>MonArticle.pdf</code>) dans la zone</li>
+      <li>Vérifie que le chemin est bien <code>articles/MonArticle.pdf</code></li>
+      <li>En bas, clique sur <strong>"Commit changes"</strong> pour valider</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2>🌐 Étape 3 : Créer le lien public GitHub Pages</h2>
+    <p>Le lien public est toujours construit comme ceci :</p>
+    <pre><code>https://rainsmore.github.io/articles/NOM_DU_FICHIER.pdf</code></pre>
+
+    <h3>🔁 Exemple :</h3>
+    <p>Si ton fichier s'appelle :<br>
+      <code>articles/Article Final - Conférence 2025.pdf</code><br>
+      L’URL sera :</p>
+    <pre><code>https://rainsmore.github.io/articles/Article%20Final%20-%20Conf%C3%A9rence%202025.pdf</code></pre>
+    <p>✅ Remarques :<br>
+      - Les <strong>espaces</strong> sont remplacés par <code>%20</code><br>
+      - Les caractères spéciaux (é, è, ç…) sont automatiquement encodés
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>💡 Astuce : Renommer les fichiers</h2>
+    <p>Pour avoir des liens plus simples, évite les espaces et caractères spéciaux :</p>
+    <ul>
+      <li>✅ <code>article_final_conference2025.pdf</code></li>
+      <li>❌ <code>Article Final - Conférence 2025.pdf</code></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🔗 Étape 4 : Utiliser le lien dans ton site</h2>
+    <h3>Exemple HTML :</h3>
+    <pre><code>&lt;a href="https://rainsmore.github.io/articles/MonArticle.pdf" target="_blank"&gt;
+  Lire l'article (PDF)
+&lt;/a&gt;
+</code></pre>
+    <p><strong>Remarque :</strong> l’attribut <code>target="_blank"</code> ouvre le fichier dans un nouvel onglet.</p>
+  </div>
+
+  <div class="section">
+    <h2>✅ Résumé rapide</h2>
+    <ul>
+      <li>📂 Ajoute ton fichier PDF dans <code>articles/</code></li>
+      <li>🔗 Crée l’URL publique avec <code>https://rainsmore.github.io/articles/NOM_DU_FICHIER.pdf</code></li>
+      <li>📎 Utilise ce lien sur ton site ou dans un email</li>
+    </ul>
+  </div>
+
+  <hr>
+  <p>Besoin d’aide ? Consulte la documentation officielle :  
+    <a href="https://docs.github.com/fr" target="_blank">GitHub Docs en français</a>
+  </p>
+<div style="text-align: center;">
+  <a href="admin.html" class="btn btn-primary" style="margin-top: 2rem;">
+    🔙 Retour à l’interface de publication
+  </a>
+</div>
+
+</body>
+</html>
