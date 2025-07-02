@@ -9,29 +9,36 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <body>
-  <!-- Header -->
   <header class="bg-white py-3">
     <div class="container d-flex align-items-center justify-content-between">
-      <div class="logo">
-        <a href="index.html">
-          <img src="assets/images/rainsmore-logo.png" alt="RAINSMORE Logo" width="150" />
-        </a>
-      </div>
-      <nav class="navbar navbar-expand-lg">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item"><a href="index.html" class="nav-link text-primary">Accueil</a></li>
-            <li class="nav-item"><a href="a-propos.html" class="nav-link text-primary">À propos</a></li>
-            <li class="nav-item"><a href="news.html" class="nav-link text-primary">News</a></li>
-            <li class="nav-item"><a href="publications.html" class="nav-link text-primary">Publications</a></li>
-          </ul>
+        <div class="logo">
+            <a href="index.html">
+                <img src="assets/images/rainsmore-logo.png" alt="RAINSMORE Logo" width="150">
+            </a>
         </div>
-      </nav>
+        <nav class="navbar navbar-expand-lg">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link text-primary">Accueil</a></li>
+                    <li class="nav-item"><a href="a-propos.html" class="nav-link text-primary">À propos</a></li>
+                    <li class="nav-item"><a href="actualites.html" class="nav-link text-primary">Actualités</a></li>
+                    <li class="nav-item"><a href="publications.html" class="nav-link text-primary">Publications</a></li>
+                    <li class="nav-item"><a href="/en/" class="nav-link">English</a></li>
+
+                    <!-- 🔐 Lien vers admin (masqué par défaut) -->
+                    <li class="nav-item"><a id="admin-link" href="admin.html" class="nav-link text-danger fw-bold" style="display: none;">Publier</a></li>
+                </ul>
+
+                    <!-- 🔐 Bouton login/logout -->
+                    <button id="auth-button" class="btn btn-outline-primary ms-3"></button>
+
+            </div>
+        </nav>
     </div>
-  </header>
+</header>
 
   <!-- Bannière -->
   <div class="banner position-relative">
@@ -75,46 +82,43 @@
 
   <!-- Firebase + Affichage -->
   <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, collection, getDocs, query, orderBy, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCrDc7Gl3VLtSkwHhR0jK_VoOslfcF6nOk",
-    authDomain: "rainsmore-85ac6.firebaseapp.com",
-    projectId: "rainsmore-85ac6",
-    storageBucket: "rainsmore-85ac6.appspot.com",
-    messagingSenderId: "313663747075",
-    appId: "1:313663747075:web:38aab8b070065bb76f0a36"
-  };
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrDc7Gl3VLtSkwHhR0jK_VoOslfcF6nOk",
+      authDomain: "rainsmore-85ac6.firebaseapp.com",
+      projectId: "rainsmore-85ac6",
+      storageBucket: "rainsmore-85ac6.appspot.com",
+      messagingSenderId: "313663747075",
+      appId: "1:313663747075:web:38aab8b070065bb76f0a36"
+    };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-  document.addEventListener("DOMContentLoaded", async () => {
-    const articleList = document.getElementById("article-list");
-    const q = query(collection(db, "articles"), orderBy("createdAt", "desc"));
-    const snapshot = await getDocs(q);
+    document.addEventListener("DOMContentLoaded", async () => {
+      const articleList = document.getElementById("article-list");
+      const q = query(collection(db, "articles"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
 
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      const card = document.createElement("div");
-      card.className = "col-md-4";
-      card.innerHTML = `
-  <div class="card h-100">
-    <div class="card-body">
-      <h5 class="card-title">${data.titre}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">${data.auteur || ""}</h6>
-      <p class="card-text">${data.contenu}</p>
-      ${data.fichierURL ? `
-        <a href="${data.fichierURL}" class="btn btn-outline-primary" target="_blank">📄 Lire le document</a>
-        <a href="${data.fichierURL}" class="btn btn-outline-secondary ms-2" download>Télécharger</a>
-      ` : ""}
-    </div>
-  </div>
-`;
-      articleList.appendChild(card);
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const card = document.createElement("div");
+        card.className = "col-md-4";
+        card.innerHTML = `
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">${data.titre}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">${data.auteur || ""}</h6>
+              <p class="card-text">${data.contenu}</p>
+              ${data.lien ? `<a href="${data.lien}" class="btn btn-primary" target="_blank">Lire plus</a>` : ""}
+            </div>
+          </div>
+        `;
+        articleList.appendChild(card);
+      });
     });
-  });
-</script>
+  </script>
 </body>
 </html>
