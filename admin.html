@@ -84,7 +84,7 @@
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
       try {
-        const userCred = await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, email, password);
         alert("✅ Connecté avec succès !");
       } catch (err) {
         console.error(err);
@@ -120,7 +120,7 @@
         return;
       }
 
-      let fichierURl = null;
+      let fichierURL = null;
 
       try {
         if (fichier) {
@@ -136,7 +136,7 @@
           date,
           lien,
           theme,
-          fichierUrl,
+          fichierURL,  // 👈 bon nom ici
           vues: 0,
           langue: "fr",
           createdAt: Timestamp.now()
