@@ -48,10 +48,6 @@
         <label for="lien" class="form-label">Lien (facultatif)</label>
         <input type="url" id="lien" class="form-control" />
       </div>
-      <div class="mb-3">
-        <label for="fichier" class="form-label">Fichier joint (PDF, Word, image)</label>
-        <input type="file" id="fichier" class="form-control" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
-      </div>
       <button type="submit" class="btn btn-success">✅ Publier</button>
     </form>
   </div>
@@ -61,7 +57,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getFirestore, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCrDc7Gl3VLtSkwHhR0jK_VoOslfcF6nOk",
@@ -75,7 +70,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const auth = getAuth(app);
-    const storage = getStorage(app);
 
     const loginSection = document.getElementById("login-section");
     const form = document.getElementById("article-form");
@@ -84,7 +78,7 @@
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+        const userCred = await signInWithEmailAndPassword(auth, email, password);
         alert("✅ Connecté avec succès !");
       } catch (err) {
         console.error(err);
@@ -113,22 +107,13 @@
       const date = document.getElementById("date").value;
       const lien = document.getElementById("lien").value.trim();
       const theme = document.getElementById("theme").value.trim();
-      const fichier = document.getElementById("fichier").files[0];
 
       if (!titre || !contenu || !auteur || !date) {
         alert("Veuillez remplir tous les champs requis.");
         return;
       }
 
-      let fichierURL = null;
-
       try {
-        if (fichier) {
-          const fichierRef = ref(storage, `publications/${Date.now()}_${fichier.name}`);
-          await uploadBytes(fichierRef, fichier);
-          fichierURL = await getDownloadURL(fichierRef);
-        }
-
         await addDoc(collection(db, "articles"), {
           titre,
           contenu,
@@ -136,9 +121,7 @@
           date,
           lien,
           theme,
-          fichierURL,  // 👈 bon nom ici
           vues: 0,
-          langue: "fr",
           createdAt: Timestamp.now()
         });
 
