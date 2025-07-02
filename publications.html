@@ -75,57 +75,44 @@
 
   <!-- Firebase + Affichage -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, getDocs, query, orderBy, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCrDc7Gl3VLtSkwHhR0jK_VoOslfcF6nOk",
-      authDomain: "rainsmore-85ac6.firebaseapp.com",
-      projectId: "rainsmore-85ac6",
-      storageBucket: "rainsmore-85ac6.appspot.com",
-      messagingSenderId: "313663747075",
-      appId: "1:313663747075:web:38aab8b070065bb76f0a36"
-    };
+  const firebaseConfig = {
+    apiKey: "AIzaSyCrDc7Gl3VLtSkwHhR0jK_VoOslfcF6nOk",
+    authDomain: "rainsmore-85ac6.firebaseapp.com",
+    projectId: "rainsmore-85ac6",
+    storageBucket: "rainsmore-85ac6.appspot.com",
+    messagingSenderId: "313663747075",
+    appId: "1:313663747075:web:38aab8b070065bb76f0a36"
+  };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-    document.addEventListener("DOMContentLoaded", async () => {
-      const articleList = document.getElementById("article-list");
-      const q = query(collection(db, "articles"), orderBy("createdAt", "desc"));
-      const snapshot = await getDocs(q);
+  document.addEventListener("DOMContentLoaded", async () => {
+    const articleList = document.getElementById("article-list");
+    const q = query(collection(db, "articles"), where("langue", "==", "fr"), orderBy("createdAt", "desc"));
+    const snapshot = await getDocs(q);
 
-      snapshot.forEach(doc => {
-        const data = doc.data();
-
-        let fichierHTML = "";
-        if (data.fichierURL) {
-          const extension = data.fichierURL.split('.').pop().toLowerCase();
-          if (["jpg", "jpeg", "png"].includes(extension)) {
-            fichierHTML = `<img src="${data.fichierURL}" alt="Fichier image" class="img-fluid rounded mt-3" />`;
-          } else {
-            fichierHTML = `<a href="${data.fichierURL}" target="_blank" class="btn btn-outline-secondary mt-2">
-              📎 Voir le fichier joint
-            </a>`;
-          }
-        }
-
-        const card = document.createElement("div");
-        card.className = "col-md-4";
-        card.innerHTML = `
-          <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">${data.titre}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">${data.auteur || ""}</h6>
-              <p class="card-text">${data.contenu}</p>
-              ${data.lien ? `<a href="${data.lien}" class="btn btn-primary mb-2 mt-auto" target="_blank">Lire plus</a>` : ""}
-              ${fichierHTML}
-            </div>
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      const card = document.createElement("div");
+      card.className = "col-md-4";
+      card.innerHTML = `
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">${data.titre}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">${data.auteur || ""}</h6>
+            <p class="card-text">${data.contenu}</p>
+            ${data.lien ? `<a href="${data.lien}" class="btn btn-primary btn-sm" target="_blank">Lire plus</a>` : ""}
+            ${data.fichierUrl ? `<a href="${data.fichierUrl}" class="btn btn-secondary btn-sm mt-2" target="_blank">📎 Voir le fichier</a>` : ""}
           </div>
-        `;
-        articleList.appendChild(card);
-      });
+        </div>
+      `;
+      articleList.appendChild(card);
     });
-  </script>
+  });
+</script>
 </body>
 </html>
