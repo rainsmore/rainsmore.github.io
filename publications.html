@@ -100,16 +100,18 @@
       const card = document.createElement("div");
       card.className = "col-md-4";
       card.innerHTML = `
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">${data.titre}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">${data.auteur || ""}</h6>
-            <p class="card-text">${data.contenu}</p>
-            ${data.lien ? `<a href="${data.lien}" class="btn btn-primary btn-sm" target="_blank">Lire plus</a>` : ""}
-            ${data.fichierUrl ? `<a href="${data.fichierUrl}" class="btn btn-secondary btn-sm mt-2" target="_blank">📎 Voir le fichier</a>` : ""}
-          </div>
-        </div>
-      `;
+  <div class="card h-100">
+    <div class="card-body">
+      <h5 class="card-title">${data.titre}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">${data.auteur || ""}</h6>
+      <p class="card-text">${data.contenu}</p>
+      ${data.fichierURL ? `
+        <a href="${data.fichierURL}" class="btn btn-outline-primary" target="_blank">📄 Lire le document</a>
+        <a href="${data.fichierURL}" class="btn btn-outline-secondary ms-2" download>Télécharger</a>
+      ` : ""}
+    </div>
+  </div>
+`;
       articleList.appendChild(card);
     });
   });
