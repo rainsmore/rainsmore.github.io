@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📘 Publication Guide</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h1 class="mb-4 text-center">📘 Guide – Managing PDFs & Article Publication</h1>
 
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-primary text-white fw-bold">1️⃣ Upload a PDF to the Repository</div>
+      <div class="card-body">
+        <ol>
+          <li>Go to your GitHub repository: <code>rainsmore.github.io</code></li>
+          <li>At the root, open or create the folder <code>articles/</code></li>
+          <li>Click on <strong>"Add file" → "Upload files"</strong></li>
+          <li>Drag and drop your PDF file, then click <strong>"Commit changes"</strong></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-success text-white fw-bold">2️⃣ Create the Link to the PDF</div>
+      <div class="card-body">
+        <p>After uploading, manually construct the link like this:</p>
+        <pre><code>https://rainsmore.github.io/articles/Your_File_Name.pdf</code></pre>
+        <p><strong>Example:</strong><br>
+          If you uploaded: <code>articles/AfrHySpace_Report.pdf</code>, the link will be:<br>
+          <code>https://rainsmore.github.io/articles/AfrHySpace_Report.pdf</code>
+        </p>
+        <p>📌 Replace spaces with <code>%20</code> if needed.</p>
+      </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-dark text-white fw-bold">3️⃣ Publish an Article on the Site</div>
+      <div class="card-body">
+        <ol>
+          <li>Go to the admin page: <a href="admin.html" target="_blank">admin.html</a></li>
+          <li>Log in with your administrator email and password</li>
+          <li>Fill out the article form:
+            <ul>
+              <li><strong>Title</strong>: the title of your article</li>
+              <li><strong>Content</strong>: a short summary</li>
+              <li><strong>Author</strong>, <strong>Date</strong>, <strong>Topic</strong> (optional)</li>
+              <li><strong>Link</strong>: paste the PDF URL here</li>
+            </ul>
+          </li>
+          <li>Click ✅ <strong>Publish</strong></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <a href="admin.html" class="btn btn-outline-primary">🔒 Go to Admin Interface</a>
+    </div>
+  </div>
+</body>
+</html>
