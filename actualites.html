@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAINSMORE - Actualités</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <header class="bg-white py-3">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="logo">
+                <a href="../index.html">English</a>
+                <img src="../assets/images/rainsmore-logo.png" alt="Logo RAINSMORE" width="150">
+                </a>
+            </div>
+            <nav class="navbar navbar-expand-lg">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a href="index.html" class="nav-link text-primary">Accueil</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link text-primary">À propos</a></li>
+                        <li class="nav-item"><a href="news.html" class="nav-link text-primary">Actualités</a></li>
+                        <li class="nav-item"><a href="publications.html" class="nav-link text-primary">Publications</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
 
+    <!-- Bannière -->
+    <div class="banner position-relative">
+        <img src="../assets/images/12.png" class="img-fluid w-100" alt="Bannière RAINSMORE">
+        <h1 class="position-absolute top-50 start-50 translate-middle text-white fw-bold bg-dark bg-opacity-50 p-3 rounded">ACTUALITÉS</h1>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-section">
+                    <h4>Contact</h4>
+                    <p>Email : contact@rainsmore.org</p>
+                    <p>Téléphone : +123 456 789</p>
+                </div>
+                <div class="col-md-4 footer-section">
+                    <h4>Liens utiles</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="publications.html">Publications</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 footer-section">
+                    <h4>Notre localisation</h4>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434508616!2d144.9630579155048!3d-37.813627742021824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0x5045675218ce6e0!2sMelbourne%2C+Australie!5e0!3m2!1sfr!2s!4v1494246398871" width="100%" height="200" style="border:0;" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <p>&copy; 2025 RAINSMORE. Tous droits réservés.</p>
+    </div>
+
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/scripts.js"></script>
+    <!-- Bootstrap JS avec Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Firebase & Firestore Scripts -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, getDocs, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCrDc7Gl3VLtSkwHhR0jK_VoOslfcF6nOk",
+    authDomain: "rainsmore-85ac6.firebaseapp.com",
+    projectId: "rainsmore-85ac6",
+    storageBucket: "rainsmore-85ac6.appspot.com",
+    messagingSenderId: "313663747075",
+    appId: "1:313663747075:web:38aab8b070065bb76f0a36"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const container = document.createElement("div");
+    container.className = "container my-5";
+    
+    // Titre section actualités
+    const title = document.createElement("h2");
+    title.textContent = "Dernières Actualités";
+    title.className = "mb-4";
+    container.appendChild(title);
+
+  
+    const q = query(collection(db, "articles"), orderBy("createdAt", "desc"));
+    const snapshot = await getDocs(q);
+
+    if (snapshot.empty) {
+      const p = document.createElement("p");
+      p.textContent = "Aucune actualité disponible pour le moment.";
+      container.appendChild(p);
+    } else {
+      const row = document.createElement("div");
+      row.className = "row";
+
+      snapshot.forEach(doc => {
+        const data = doc.data();
+
+        const col = document.createElement("div");
+        col.className = "col-md-4 mb-4";
+
+        col.innerHTML = `
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">${data.titre}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">${data.auteur || ""}</h6>
+              <p class="card-text">${data.contenu}</p>
+              ${data.lien ? `<a href="${data.lien}" target="_blank" class="btn btn-primary">Lire la suite</a>` : ""}
+            </div>
+          </div>
+        `;
+        row.appendChild(col);
+      });
+
+      container.appendChild(row);
+    }
+
+    // Insérer avant le footer (ou à la fin du body)
+    document.body.insertBefore(container, document.querySelector("footer"));
+  });
+</script>
+</body>
+</html>
