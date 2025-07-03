@@ -28,6 +28,8 @@
           </ul>
         </div>
       </nav>
+      <!-- 🔒 Admin Button -->
+      <a href="admin.html" class="btn btn-outline-dark btn-sm">🔒 Admin</a>
     </div>
   </header>
 
@@ -71,7 +73,7 @@
 
     document.addEventListener("DOMContentLoaded", async () => {
       const container = document.getElementById("article-list");
-      const q = query(collection(db, "articles"), where("langue", "==", "en"), orderBy("createdAt", "desc"));
+      const q = query(collection(db, "articles"), orderBy("createdAt", "desc"));
       const snapshot = await getDocs(q);
 
       snapshot.forEach(doc => {
